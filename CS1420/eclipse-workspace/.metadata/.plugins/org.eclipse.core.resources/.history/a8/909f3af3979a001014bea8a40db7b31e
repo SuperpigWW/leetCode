@@ -1,0 +1,73 @@
+package assign05;
+
+public class Month {
+	
+	private int monthNumber;
+	public Month() {
+		this.monthNumber = 1;
+	}
+	public Month(int monthNumber) {
+		this.monthNumber = monthNumber;
+	}
+	public int getMonthNumber() {
+		return this.monthNumber;
+	}
+	public int lastDay(boolean isLeapYear) {
+		if (this.monthNumber == 1 || this.monthNumber == 3 || this.monthNumber == 5 || this.monthNumber == 7
+				 || this.monthNumber == 8 || this.monthNumber == 10 || this.monthNumber == 12)
+			return 31;
+		else if (this.monthNumber == 4 || this.monthNumber == 6 || this.monthNumber == 9 || this.monthNumber == 11)
+			return 30;
+		else if (this.monthNumber == 2) {
+			if (isLeapYear)
+				return 29;
+			else
+				return 28;
+		}
+		else
+			return -1;
+	}
+	public boolean validDay(int day, boolean isLeapYear) {
+		return day >= 1 && day <= this.lastDay(isLeapYear);
+	}
+	public String toString() {
+		String monthPrint;
+		if (this.monthNumber == 1)
+			monthPrint = "January";
+		else if(this.monthNumber == 2)
+			monthPrint = "February";
+		else if(this.monthNumber == 3)
+			monthPrint = "March";
+		else if(this.monthNumber == 4)
+			monthPrint = "April";
+		else if(this.monthNumber == 5)
+			monthPrint = "May";
+		else if(this.monthNumber == 6)
+			monthPrint = "June";
+		else if(this.monthNumber == 7)
+			monthPrint = "July";
+		else if(this.monthNumber == 8)
+			monthPrint = "August";
+		else if(this.monthNumber == 9)
+			monthPrint = "September";
+		else if(this.monthNumber == 10)
+			monthPrint = "October";
+		else if(this.monthNumber == 11)
+			monthPrint = "November";
+		else if(this.monthNumber == 12)
+			monthPrint = "December";
+		else
+		    monthPrint = "Error";
+		return monthPrint;
+	}
+	public boolean equals(Object other) {
+		if (other == null) {
+            return false;
+        }
+        if (!(other instanceof Month)) {
+            return false;  
+        }
+        Month otherMonth = (Month) other;  
+        return this.monthNumber == otherMonth.monthNumber;
+	}
+}

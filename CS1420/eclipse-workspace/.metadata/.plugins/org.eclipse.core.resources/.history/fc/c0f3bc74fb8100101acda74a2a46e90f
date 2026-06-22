@@ -1,0 +1,40 @@
+// CS 1420 Assignment 1 by Haoquan Wang (August 24, 2025).
+
+package assign01;
+
+public class CoinCalculator {
+
+	public static void main(String[] args) {
+		
+		int uid = 1570975;
+		int penny, nickel, dime, quarter, dollar;
+		/* 
+         * set the "remain" variable to save the total
+         * amount of money for the quantity of the next
+         * denomination
+         */
+		int remain;			  
+		
+		dollar = uid / 100;
+		remain = uid % 100;
+		
+		quarter = remain / 25;
+		remain = remain % 25;
+		
+		dime = remain / 10;
+		remain = remain % 10;
+		
+		nickel = remain / 5;
+		remain = remain % 5;
+		
+		penny = remain;
+		
+		System.out.println(uid + " pennies is equivalent to " 
+							+ dollar + " dollar(s), " 
+							+ quarter + " quarter(s), " 
+							+ dime + " dime(s), " 
+							+ nickel + " nickel(s), and " 
+							+ penny + " penny(ies).");
+	}
+
+}
