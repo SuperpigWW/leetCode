@@ -1,0 +1,161 @@
+package assign06;
+/**
+ * The purpose of this assignment is to practice writing recursive methods
+ * 
+ * @author Haoquan Wang
+ * @version 10.02.2025
+ */
+public class Word {
+	private char[] letters;
+	
+	/**
+	 * Constructs a Word object from a String.
+	 * 
+	 * @param word - the string to create the Word from
+	 * @throws IllegalArgumentException if any character in the string is not a letter
+	 */
+	public Word(String word) {
+		this.letters = new char[word.length()];
+		for (int i = 0; i < word.length(); i++) {
+        	if ((word.charAt(i) >= 'A' && word.charAt(i) <= 'Z') || (word.charAt(i) >= 'a' && word.charAt(i) <= 'z'))
+            	this.letters[i] = word.charAt(i);
+            else
+            	throw new IllegalArgumentException ("Please enter letters only.");
+            		
+        }
+	}
+	
+	/**
+	 * Constructs a Word object from a char array.
+	 * 
+	 * @param word - the char array to create the Word from
+	 * @throws IllegalArgumentException if any character in the array is not a letter
+	 */
+	public Word(char[] word) {
+		this.letters = new char[word.length];  
+	    for (int i = 0; i < word.length; i++) {
+	  
+        	if ((word[i] >= 'A' && word[i] <= 'Z') || (word[i] >= 'a' && word[i] <= 'z'))
+            	this.letters[i] = word[i];
+            else
+            	throw new IllegalArgumentException ("Please enter letters only.");
+	    }
+	}
+	
+	/**
+	 * Generates and returns a String object to represent this Word object 
+	 * (driver method).
+	 * 
+	 * @return a String object that represents this Word object
+	 */
+	public String toString() {
+	   return toString(0);
+	}
+		
+	/**
+	 * Generates and returns a String object to represent the letters of 
+	 * this Word object from a given index to the last index (recursive method).
+	 * 
+	 * @param startIndex - index at which to start
+	 * @return the letters of this Word from startIndex to the last index, as a String
+	 */
+	private String toString(int startIndex) {
+	   // base case
+	   if(startIndex == letters.length)
+	      return "";
+	   // recursive case
+	   return letters[startIndex] + toString(startIndex + 1);
+	}
+	
+	/**
+	 * Counts the number of occurrences of a given letter in this Word (driver method).
+	 * 
+	 * @param letter - the letter to count occurrences of
+	 * @return the number of times the letter appears in this Word
+	 * @throws IllegalArgumentException if the character parameter is not a letter
+	 */
+	public int countOccurrences(char letter) {
+		if ((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z')) {
+			return countOccurrences(letter, 0);
+		}
+		else	
+			throw new IllegalArgumentException ("Please enter letters only.");
+	}
+	
+	/**
+	 * Counts the number of occurrences of a given letter in this Word from a given index (recursive method).
+	 * 
+	 * @param letter - the letter to count occurrences of
+	 * @param index - the current index being checked
+	 * @return the number of times the letter appears from the current index to the end
+	 */
+	private int countOccurrences(char letter, int index) {
+		int countOccurrences = 0;
+		if (index >= this.letters.length) 
+	        return 0;
+		if (index < 0)
+			throw new IllegalArgumentException ("Index out of range");
+		if (this.letters[index] == letter)
+			countOccurrences = 1;
+		return countOccurrences + countOccurrences(letter, index + 1);
+	}
+	
+	/**
+	 * Replaces the last occurrence of a given letter with a replacement letter (driver method).
+	 * 
+	 * @param letter - the letter to be replaced
+	 * @param replacement - the letter to replace with
+	 * @throws IllegalArgumentException if either character parameter is not a letter
+	 */
+	public void replaceLastOccurrence(char letter, char replacement) {
+		if (((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z')) &&
+				((replacement >= 'A' && replacement <= 'Z') || (replacement >= 'a' && replacement <= 'z'))) {
+			replaceLastOccurrence(letter, replacement, this.letters.length - 1);
+		}
+		else	
+			throw new IllegalArgumentException ("Please enter letters only.");
+	}
+	
+	/**
+	 * Replaces the last occurrence of a given letter with a replacement letter (recursive method).
+	 * 
+	 * @param letter - the letter to be replaced
+	 * @param replacement - the letter to replace with
+	 * @param index - the current index being checked
+	 */
+	private void replaceLastOccurrence(char letter, char replacement, int index) { 
+		if (index < 0)
+			return;
+		
+		if (this.letters[index] == letter) {
+			this.letters[index] = replacement;
+			return;
+		}
+		
+		replaceLastOccurrence(letter, replacement, index - 1);
+	}
+	
+	/**
+	 * Creates and returns a new Word that is the reverse of this Word (driver method).
+	 * 
+	 * @return a new Word object with letters in reverse order
+	 */
+	public Word reverse() {
+		char[] wordReverse = new char[this.letters.length];
+		reverse(wordReverse, this.letters.length - 1);
+		return new Word(wordReverse);
+	}
+	
+	/**
+	 * Reverses the letters of this Word into the provided char array (recursive method).
+	 * 
+	 * @param reversedWord - the array to store the reversed letters
+	 * @param index - the current index being processed
+	 */
+	private void reverse(char[] reversedWord, int index) {
+		if (index < 0)
+			return;
+		reversedWord[this.letters.length - 1 - index] =  this.letters[index];
+		reverse(reversedWord, index - 1);
+	}
+}

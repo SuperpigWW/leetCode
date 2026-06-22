@@ -1,0 +1,41 @@
+package assign06;
+
+public class Word {
+	private char[] letters;
+	public Word(String word) {
+		this.letters = new char[word.length()];
+        for (int i = 0; i < word.length(); i++) {
+            this.letters[i] = word.charAt(i);
+        }
+	}
+	public Word(char[] word) {
+		this.letters = new char[word.length];  
+	    for (int i = 0; i < word.length; i++) {
+	        this.letters[i] = word[i];  
+	    }
+	}
+	/**
+	 * Generates and returns a String object to represent this Word object 
+	 * (driver method).
+	 * 
+	 * @return a String object that represents this Word object
+	 */
+	public String toString() {
+	   return toString(0);
+	}
+		
+	/**
+	 * Generates and returns a String object to represent the letters of 
+	 * this Word object from a given index to the last index (recursive method).
+	 * 
+	 * @param startIndex - index at which to start
+	 * @return the letters of this Word from startIndex to the last index, as a String
+	 */
+	private String toString(int startIndex) {
+	   // base case
+	   if(startIndex == letters.length)
+	      return "";
+	   // recursive case
+	   return letters[startIndex] + toString(startIndex + 1);
+	}
+}

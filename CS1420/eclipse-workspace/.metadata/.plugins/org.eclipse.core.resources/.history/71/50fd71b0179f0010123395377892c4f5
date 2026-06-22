@@ -1,0 +1,14 @@
+private int countOccurrences(char letter, int index) {
+		int countOccurrences = 0;
+		if (index >= this.letters.length) 
+	        return 0;
+		if (index < 0)
+			throw new IllegalArgumentException ("Index out of range");
+		if ((letter >= 'A' && letter <= 'Z') || letter >= 'a' && letter <= 'z'){
+			if (this.letters[index] == letter)
+				countOccurrences = 1;
+		}
+		else
+			throw new IllegalArgumentException ("Please enter letters only.");
+		return countOccurrences + countOccurrences(letter, index + 1);
+	}
