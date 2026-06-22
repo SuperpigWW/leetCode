@@ -1,12 +1,9 @@
-\# LeetCode Solutions
-
-
+# LeetCode Solutions
 
 This repository contains my personal solutions and code implementations for practicing LeetCode problems.
 
 
-
-\### My Approach:
+### My Approach:
 
 \* \*\*Independent Thinking First:\*\* I always attempt to analyze and solve each problem independently before looking at any external resources.
 
